@@ -3,7 +3,12 @@ namespace DesafioProjetoHospedagem.Models
     public class Reserva
     {
         public List<Pessoa> Hospedes { get; set; }
-        public Suite Suite { get; set; }
+        public Reserva(Suite suite) 
+        {
+            this.Suite = suite;
+   
+        }
+                public Suite Suite { get; set; }
         public int DiasReservados { get; set; }
 
         public Reserva() { }
@@ -17,7 +22,7 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
             // *IMPLEMENTE AQUI*
-            if (true)
+            if (Suite.Capacidade >= hospedes.Count)
             {
                 Hospedes = hospedes;
             }
@@ -25,6 +30,8 @@ namespace DesafioProjetoHospedagem.Models
             {
                 // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
                 // *IMPLEMENTE AQUI*
+                throw new Exception("Aquantidade de hóspedes não pode exceder a capacidade da suíte");
+
             }
         }
 
@@ -37,7 +44,7 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
             // *IMPLEMENTE AQUI*
-            return 0;
+            return Hospedes.Count;
         }
 
         public decimal CalcularValorDiaria()
@@ -46,12 +53,14 @@ namespace DesafioProjetoHospedagem.Models
             // Cálculo: DiasReservados X Suite.ValorDiaria
             // *IMPLEMENTE AQUI*
             decimal valor = 0;
+            valor = DiasReservados * Suite.ValorDiaria;
 
             // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
             // *IMPLEMENTE AQUI*
-            if (true)
+            if (DiasReservados >= 10)
             {
-                valor = 0;
+                decimal desconto = 0.1M;
+                valor = valor - (valor * desconto);
             }
 
             return valor;
